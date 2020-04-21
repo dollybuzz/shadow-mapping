@@ -19,10 +19,10 @@ void main(void) {
     float specularIntensity = pow(max(dot(reflection01, directionToEye01), 0.0), 64.0);
 
     vec4 texColor = texture2D(uAlbedoTexture, vTexCoords);
-    // vec4 shadowColor = texture2D(uShadowTexture, vTexCoords);
+    vec4 shadowColor = texture2D(uShadowTexture, vTexCoords);
 
-    vec3 ambient = vec3(0.2, 0.2, 0.2) * texColor.rgb;
-    vec3 diffuseColor = texColor.rgb * lambert;
+    vec3 ambient = vec3(0.2, 0.2, 0.2) * shadowColor.rgb;
+    vec3 diffuseColor = shadowColor.rgb * lambert;
     vec3 specularColor = vec3(1.0, 1.0, 1.0) * specularIntensity;
     vec3 finalColor = ambient + diffuseColor + specularColor;
 
