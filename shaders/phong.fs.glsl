@@ -41,7 +41,7 @@ void main(void) {
     float lightDepth = (lightSpaceNDC.z+1.0)/2.0;
 
     // use this as part of todo #10
-    float bias = 0.004;
+    //float bias = 0.004;
 
     // todo #7
     // Sample from the shadow map texture using the previously calculated lightSpaceUV
@@ -51,10 +51,10 @@ void main(void) {
     gl_FragColor = vec4(lightDepth, lightDepth, lightDepth, 1.0);
 
     // todo #9 
-    // remove this when you are ready to add shadows
-    //if (/* in shadow*/) {
-    //   gl_FragColor = vec4(ambient, 1.0);
-    //} else {
-    //    gl_FragColor = vec4(finalColor, 1.0);
-    //}
+    //remove this when you are ready to add shadows
+    if (lightDepth > shadowColor.z) {
+       gl_FragColor = vec4(ambient, 1.0);
+    } else {
+        gl_FragColor = vec4(finalColor, 1.0);
+    }
 }
